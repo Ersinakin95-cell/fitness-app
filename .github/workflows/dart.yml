@@ -19,6 +19,10 @@ jobs:
     - name: Generate platform files
       run: flutter create . --platforms=android --project-name=fitness_app
 
+    - name: Update Kotlin version
+      run: |
+        sed -i "s/ext.kotlin_version = .*/ext.kotlin_version = '1.9.22'/" android/build.gradle || true
+
     - name: Install dependencies
       run: flutter pub get
 
