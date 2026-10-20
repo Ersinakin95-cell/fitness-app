@@ -13,20 +13,8 @@ jobs:
 
     - uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.22.0'
+        flutter-version: '3.19.0'
         channel: 'stable'
-
-    - name: Generate platform files
-      run: flutter create . --platforms=android --project-name=fitness_app
-
-    - name: Update Kotlin version
-      run: |
-        if [ -f "android/settings.gradle" ]; then
-          sed -i 's/version ".*"/version "1.9.22"/g' android/settings.gradle || true
-        fi
-        if [ -f "android/build.gradle" ]; then
-          sed -i "s/ext.kotlin_version = .*/ext.kotlin_version = '1.9.22'/" android/build.gradle || true
-        fi
 
     - name: Install dependencies
       run: flutter pub get
