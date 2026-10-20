@@ -16,6 +16,11 @@ jobs:
         flutter-version: '3.19.0'
         channel: 'stable'
 
+    - name: Generate clean Android files
+      run: |
+        rm -rf android ios linux macos windows web
+        flutter create . --platforms=android --project-name=fitness_app
+
     - name: Install dependencies
       run: flutter pub get
 
