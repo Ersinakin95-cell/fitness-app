@@ -21,6 +21,10 @@ jobs:
         rm -rf android ios linux macos windows web
         flutter create . --platforms=android --project-name=fitness_app
 
+    - name: Update minSdk to 21
+      run: |
+        sed -i 's/minSdkVersion flutter.minSdkVersion/minSdkVersion 21/g' android/app/build.gradle || true
+
     - name: Install dependencies
       run: flutter pub get
 
