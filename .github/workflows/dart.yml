@@ -16,8 +16,14 @@ jobs:
         flutter-version: '3.19.0'
         channel: 'stable'
 
-    - name: Generate Android files
-      run: flutter create . --platforms=android --project-name=fitness_app
+    - name: Generate clean Android files
+      run: |
+        rm -rf android ios linux macos windows web
+        flutter create . --platforms=android --project-name=fitness_app
+
+    - name: Update minSdk to 21
+      run: |
+        sed -i 's/minSdkVersion flutter.minSdkVersion/minSdkVersion 21/g' android/app/build.gradle || true
 
     - name: Install dependencies
       run: flutter pub get
