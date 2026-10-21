@@ -13,23 +13,19 @@ jobs:
 
     - uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.19.0'
+        flutter-version: '3.22.0'
         channel: 'stable'
 
-    - name: Generate clean Android files
+    - name: Clean & Recreate Android
       run: |
-        rm -rf android ios linux macos windows web
+        rm -rf android
         flutter create . --platforms=android --project-name=fitness_app
-
-    - name: Update minSdk to 21
-      run: |
-        sed -i 's/minSdkVersion flutter.minSdkVersion/minSdkVersion 21/g' android/app/build.gradle || true
 
     - name: Install dependencies
       run: flutter pub get
 
     - name: Build APK
-      run: flutter build apk --release
+      run: flutter build apk --release --no-tree-shake-icons
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
