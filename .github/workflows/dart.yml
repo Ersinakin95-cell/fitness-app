@@ -27,7 +27,7 @@ jobs:
         rm -rf android
         flutter create . --platforms=android --project-name=fitness_app
 
-    - name: Fix Android Gradle & SDK Settings
+    - name: Fix Android SDK & Kotlin Settings
       run: |
         sed -i 's/minSdkVersion flutter.minSdkVersion/minSdkVersion 21/g' android/app/build.gradle || true
         sed -i 's/compileSdkVersion flutter.compileSdkVersion/compileSdkVersion 34/g' android/app/build.gradle || true
