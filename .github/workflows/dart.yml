@@ -33,8 +33,13 @@ jobs:
         sed -i 's/compileSdkVersion flutter.compileSdkVersion/compileSdkVersion 34/g' android/app/build.gradle || true
         sed -i 's/targetSdkVersion flutter.targetSdkVersion/targetSdkVersion 34/g' android/app/build.gradle || true
         
-        # Kotlin нұсқасын plugins блогында автоматты түрде жаңарту
-        sed -i 's/org.jetbrains.kotlin.android" version "[^"]*"/org.jetbrains.kotlin.android" version "1.9.10"/g' android/build.gradle || true
+        # settings.gradle және build.gradle ішіндегі Kotlin нұсқасын 1.9.10 ету
+        if [ -f "android/settings.gradle" ]; then
+          sed -i 's/version ".*"/version "1.9.10"/g' android/settings.gradle || true
+        fi
+        if [ -f "android/build.gradle" ]; then
+          sed -i 's/ext.kotlin_version = .*/ext.kotlin_version = "1.9.10"/g' android/build.gradle || true
+        fi
 
     - name: Get dependencies
       run: flutter pub get
